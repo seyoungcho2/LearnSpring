@@ -1,1 +1,1 @@
-rootProject.name = "logging"
+rootProject.name = "setting-logging"
