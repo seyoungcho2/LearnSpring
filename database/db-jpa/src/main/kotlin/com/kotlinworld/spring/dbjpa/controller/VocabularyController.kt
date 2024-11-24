@@ -17,27 +17,22 @@ class VocabularyController(
         return vocabularyRepository.findById(id).get()
     }
 
+    @GetMapping("/vocabulary/all")
+    fun getAllVocabulary(): List<Vocabulary> {
+        return vocabularyRepository.findAll()
+    }
+
     @PostMapping("/vocabulary")
     fun addVocabulary(
-        @RequestParam(required = false) id: String?,
         @RequestParam word: String,
         @RequestParam meaning: String
     ): Vocabulary {
-        val vocabulary = if (id != null) {
-            Vocabulary(id = id, word = word, meaning = meaning)
-        } else {
-            Vocabulary(word = word, meaning = meaning)
-        }
+        val vocabulary = Vocabulary(word = word, meaning = meaning)
         return vocabularyRepository.save(vocabulary)
     }
 
     @DeleteMapping
     fun deleteVocabulary(@RequestParam id: String) {
         vocabularyRepository.deleteById(id)
-    }
-
-    @GetMapping("/vocabulary/all")
-    fun getAllVocabulary(): List<Vocabulary> {
-        return vocabularyRepository.findAll()
     }
 }
